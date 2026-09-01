@@ -1,0 +1,26 @@
+{% extends "shop/base.html" %}
+{% block title %}کد تخفیف{% endblock %}
+
+{% block content %}
+<h2>اعمال کد تخفیف</h2>
+
+<p>مبلغ سفارش: <strong>{{ order.total_price }} تومان</strong></p>
+
+{% if order.discount_amount %}
+    <p style="color: green">
+        تخفیف اعمال شده: {{ order.discount_amount }} تومان
+    </p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="code" placeholder="کد تخفیف">
+    <button type="submit">اعمال</button>
+</form>
+
+<br>
+
+<a href="{% url 'order:order_detail' order.id %}">
+    ادامه و مشاهده سفارش
+</a>
+{% endblock %}

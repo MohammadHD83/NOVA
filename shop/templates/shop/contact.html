@@ -1,0 +1,27 @@
+{% extends 'shop/base.html' %}
+{% block title %}تماس با ما{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">تماس با ما</h1>
+
+<form method="post" class="card p-4 shadow-sm">
+  {% csrf_token %}
+
+  <div class="mb-3">
+    <label class="form-label">نام</label>
+    <input name="name" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">ایمیل</label>
+    <input type="email" name="email" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">پیام</label>
+    <textarea name="message" class="form-control" rows="4" required></textarea>
+  </div>
+
+  <button class="btn btn-primary">ارسال پیام</button>
+</form>
+{% endblock %}

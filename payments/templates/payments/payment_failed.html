@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}پرداخت ناموفق{% endblock %}
+
+{% block content %}
+<div style="text-align:center;margin-top:40px">
+    <h1 style="color:red">❌ پرداخت ناموفق بود</h1>
+
+    <p>در صورت کسر وجه، مبلغ تا ۷۲ ساعت آینده بازگردانده می‌شود.</p>
+
+    <br>
+
+    <a href="{% url 'payments:request' order.id %}"
+       style="padding:10px;background:#dc3545;color:#fff;text-decoration:none">
+        تلاش مجدد برای پرداخت
+    </a>
+
+    <br><br>
+
+    <a href="/" style="color:#555">
+        بازگشت به صفحه اصلی
+    </a>
+</div>
+{% endblock %}

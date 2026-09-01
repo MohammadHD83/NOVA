@@ -1,0 +1,57 @@
+{% extends "shop/base.html" %}
+{% block title %}جزئیات سفارش{% endblock %}
+
+{% block content %}
+<h2>سفارش شماره {{ order.id }}</h2>
+
+<hr>
+
+<h3>آیتم‌های سفارش</h3>
+<ul>
+    {% for item in order.items.all %}
+        <li>
+            {{ item.product.name }} |
+            {{ item.quantity }} × {{ item.price }} =
+            {{ item.get_total }} تومان
+        </li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<h3>آدرس ارسال</h3>
+<p>
+    {{ order.address.full_name }} <br>
+    {{ order.address.phone }} <br>
+    {{ order.address.city }} <br>
+    {{ order.address.address }} <br>
+    کد پستی: {{ order.address.postal_code }}
+</p>
+
+<hr>
+
+<h3>خلاصه پرداخت</h3>
+<p>مبلغ کل: {{ order.total_price }} تومان</p>
+
+{% if order.discount_amount %}
+<p>تخفیف: {{ order.discount_amount }} تومان</p>
+<p><strong>
+    مبلغ نهایی:
+    {{ order.get_final_price }} تومان
+</strong></p>
+{% else %}
+<p><strong>مبلغ نهایی: {{ order.total_price }} تومان</strong></p>
+{% endif %}
+
+<hr>
+
+{% if order.status == "pending" %}
+    <a href="{% url 'payments:start_payment' order.id %}"
+       style="padding:10px;background:green;color:white;text-decoration:none">
+        پرداخت سفارش
+    </a>
+{% else %}
+    <p style="color: green">این سفارش پرداخت شده است ✅</p>
+{% endif %}
+
+{% endblock %}

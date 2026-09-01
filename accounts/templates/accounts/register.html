@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>ثبت‌نام</title>
+</head>
+<body>
+
+<h2>ثبت‌نام با شماره موبایل</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+
+    <div>
+        {{ form.phone.label_tag }}
+        {{ form.phone }}
+        {{ form.phone.errors }}
+    </div>
+
+    {# اگر توی RegisterForm فیلد name داشتی #}
+    {% if form.name %}
+    <div>
+        {{ form.name.label_tag }}
+        {{ form.name }}
+        {{ form.name.errors }}
+    </div>
+    {% endif %}
+
+    <button type="submit">دریافت کد تأیید</button>
+</form>
+
+<p>
+    قبلاً ثبت‌نام کرده‌اید؟
+    <a href="{% url 'login' %}">ورود</a>
+</p>
+
+</body>
+</html>

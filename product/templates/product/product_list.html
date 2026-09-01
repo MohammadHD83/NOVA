@@ -1,0 +1,18 @@
+{% extends 'shop/base.html' %}{% block title %}نهایی‌سازی خرید{% endblock %}
+{% block content %}
+    <h1>🛍️ محصولات فروشگاه</h1>
+
+    {% for product in products %}
+    <div class="product">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+        <img src="https://via.placeholder.com/200" alt="no image">
+        {% endif %}
+        <h3>{{ product.name }}</h3>
+        <p class="price">{{ product.price }} تومان</p>
+        <p><a href="{% url 'add_to_cart' product.id %}">افزودن به سبد 🛒</a></p>
+    </div>
+    {% endfor %}
+
+{% endblock %}

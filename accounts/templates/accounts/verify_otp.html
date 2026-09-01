@@ -1,0 +1,17 @@
+<!-- accounts/templates/accounts/verify_otp.html -->
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>تایید OTP</title>
+</head>
+<body>
+<h2>تایید کد یکبار مصرف</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">ورود</button>
+</form>
+</body>
+</html>

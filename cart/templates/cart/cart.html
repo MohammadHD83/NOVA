@@ -1,0 +1,54 @@
+{% extends 'shop/base.html' %}{% block title %}سبد خرید{% endblock %}
+{% block content %}
+<h1 class="mb-4">سبد خرید</h1>
+{% if cart.items %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>محصول</th>
+      <th>قیمت</th>
+      <th>تعداد</th>
+      <th>جمع</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in cart.items %}
+    <tr>
+      <td>{{ item.product.name }}</td>
+      <td>{{ item.product.price }}</td>
+      <td>
+        <form
+          method="post"
+          action="{% url 'shop:update_cart' item.product.id %}"
+        >
+          {% csrf_token %}
+          <input
+            type="number"
+            name="quantity"
+            value="{{ item.quantity }}"
+            min="1"
+            style="width: 70px"
+            class="form-control d-inline-block"
+          />
+          <button class="btn btn-sm btn-outline-secondary">به‌روزرسانی</button>
+        </form>
+      </td>
+      <td>{{ item.total_price }}</td>
+      <td>
+        <form
+          method="post"
+          action="{% url 'shop:remove_from_cart' item.product.id %}"
+        >
+          {% csrf_token %}<button class="btn btn-sm btn-danger">حذف</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p class="fw-bold">مجموع: {{ cart.total_price }} تومان</p>
+<a href="{% url 'shop:checkout' %}" class="btn btn-primary">نهایی‌سازی خرید</a>
+{% else %}
+<p>سبد خرید خالی است.</p>
+{% endif %} {% endblock %}

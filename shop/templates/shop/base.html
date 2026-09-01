@@ -1,0 +1,57 @@
+{% load static %}
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}فروشگاه{% endblock %}</title>
+
+  <!-- Bootstrap 5 -->
+  {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet"> {% endcomment %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="bg-light">
+
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="{% url 'shop:index' %}">🛍 نام فروشگاه</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="{% url 'shop:index' %}">خانه</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'product_list' %}">محصولات</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'cart' %}">🛒 سبد خرید</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'shop:contact' %}">تماس با ما</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Messages -->
+<main class="container py-4">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  {% block content %}{% endblock %}
+</main>
+
+<!-- Footer -->
+<footer class="bg-white text-center py-3 mt-5 shadow-sm">
+  <div class="container">
+    <p class="mb-1">© 2025 نام فروشگاه</p>
+    <small>تمامی حقوق محفوظ است</small>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
